@@ -3,11 +3,11 @@
 Follow these strict architectural and coding guidelines for all development tasks.
 
 ## 1. Project Structure & Imports
-- **Page Logic:** Start from `page.tsx`. Keep static layout/headings here. Move complex UI to dedicated server components.
-- **Component Placement:** Create a folder for each feature in `src/components/`. If a page is complex, use `src/components/[page-name]/`.
+- **Page Logic:** Start from `page.tsx`. Keep static design/headings here. Move big or complex UI to dedicated server components for clean and small page.tsx.
+- **Component Placement:** Create a folder for each feature in `src/components/`. If the component is not shared or normal then use `src/components/[page-name]/`. 
 - **Alias Imports:** Always use path aliases for imports (e.g., `@/types/...`, `@/utils/...`, `@/components/...`). Never use relative path climbing (e.g., ../../../).
-- **Type Safety:** All TypeScript types/interfaces must reside in `src/types/` (flat files, e.g., `types/qr.ts`). NO inline interfaces.
-- **Utils:** Business logic must reside in `src/utils/`. NO raw logic/functions inside components.
+- **Type Safety:** All TypeScript types/interfaces must reside in `src/types/` (flat files, e.g., `types/qr.ts`). NO in-component interfaces.
+- **Utils:** Business logic must reside in `src/utils/` (create Specific page/task for specific file). NO raw logic/functions inside components.
 
 ## 2. Data Fetching & State Management
 - **Server-First:** Always prioritize server-side fetching.
@@ -17,9 +17,9 @@ Follow these strict architectural and coding guidelines for all development task
     const data = await res.json();
     if (!data.success) return <ErrorMessage />;
     ```
-- **Client-Side Fetching:** Use only data-fetching hooks (e.g., React Query, SWR). No raw `useEffect` fetches.
+- **Client-Side Fetching:** If need fetch data from Client Side component, then Use only data-fetching hooks.
 - **Suspense & Skeletons:** Wrap dynamic components in `<Suspense>`. Provide pixel-perfect custom skeletons in `src/components/skeletons/` that match the component layout.
-- **Client-Side Fetching:** Use only robust data-fetching hooks (e.g., React Query, SWR). No raw `useEffect` fetches.
+- **Client-Side Fetching:** Use only robust data-fetching hooks (e.g., React Query, SWR).
 - **Suspense & Skeletons:** 
   - Wrap dynamic components in `<Suspense>`.
   - Provide pixel-perfect custom skeletons in `src/components/skeletons/`.
@@ -31,12 +31,12 @@ Follow these strict architectural and coding guidelines for all development task
 - **Container Strategy:** Always use the `.container` class (Max-width 1736px, responsive paddings).
 - **Modals:** 
   - Use modal popups for destructive/complex actions.
-  - All modals must be **smoothly animated** (e.g., utilizing `framer-motion` or `shadcn` dialog transitions) for a premium feel.
+  - All modals must be **smoothly animated** (e.g., utilizing tailwind or `framer-motion` or `shadcn` dialog transitions) for a premium feel.
   - Modal state (image display, rating, text) must persist on accidental close, but reset on page reload.
-- **Micro-interactions:** Use GSAP or Framer Motion for smooth hover states and premium animation curves.
+- **Micro-interactions:** use Framer Motion for smooth hover states and premium animation curves (Not all times, should apply If need to show premium feel).
 
 ## 4. Coding Constraints
-- **File Limit:** Strictly < 200 lines per file. Modularize immediately if exceeding.
+- **File Limit:** Strictly < 300 lines per file. Modularize immediately if exceeding.
 - **Logic Handling:** Handle all events (Edit/Delete/Click) using functions imported from `utils/`.
 - **Prohibited:** 
   - No `document` or `window` access.
@@ -46,8 +46,7 @@ Follow these strict architectural and coding guidelines for all development task
 
 ## 5. API & Backend
 - **Response Structure:** Must return `{ success: boolean, message: string, data: any }`.
-- **BigInt Handling:** Always convert BigInt to Number during JSON serialization.
-- **Auth:** Always use helper functions like `adminVerify()` for server-side security.
+- **Auth:** Always use helper functions like `adminVerify()` for server-side security. (If need)
 
 
 
