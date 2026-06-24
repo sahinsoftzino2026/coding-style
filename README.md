@@ -1,0 +1,1 @@
+I am following a strict coding standard for my Next.js project. Please read the CODING_STANDARDS.md file provided above. For all future requests, you MUST strictly adhere to this architectural pattern, folder structure, and coding rules. If you understand, acknowledge with 'Standards acknowledged, ready to code.' and then ask for my current task.
